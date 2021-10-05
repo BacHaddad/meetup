@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <EventsList :events="events" />
+    <Header :attending="attending" />
+    <EventsList v-on:addToCalender="addToAttending" v-on:removeFromCalender="removeFromAttending"  :events="events" />
   </div>
 </template>
 
@@ -23,8 +23,24 @@ export default {
         { id: 4, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events' },
         { id: 5, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events' },
       ],
+
+      attending:[]
     };
   },
+
+  methods: {
+addToAttending(event){
+  console.log("from attending in app", event);
+  this.attending.push(event);
+  console.log("attending :", this.attending);
+},
+removeFromAttending(event){
+  console.log("from attending in app", event);
+  this.attending = this.attending.filter(item => item.id != event.id);
+  console.log("attending :", this.attending);
+}
+  }
+  
 };
 </script>
 

@@ -2,7 +2,8 @@
   <header>
     <div class="nav">
       <h1>meetups</h1>
-      <h2 class="calender-button">your calender</h2>
+      <h2 v-if="attending.length" class="calender-button">attending: <small>{{attending.length}} </small></h2>
+      <h2 v-else="attending.length" class="calender-button">no events </h2>
     </div>
   </header>
 </template>
@@ -11,23 +12,12 @@
 export default {
   components: {},
   props: {
-    cart: Array,
-    finalPrice: Number,
+    attending: Array,
   },
-  data: function() {
-    return {
-      toggle: false,
-    };
+  data() {
+    return {};
   },
-  methods: {
-    toggleCart() {
-      this.toggle = !this.toggle;
-    },
-
-    deleteItem(id) {
-      this.$emit('deleteItem', id);
-    },
-  },
+  methods: {},
 };
 </script>
 
