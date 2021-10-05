@@ -36,7 +36,7 @@ header {
   position: fixed;
   top: 0;
   min-width: 90vw;
-  margin:  auto;
+  margin: auto;
   background-color: #324b22;
 }
 
@@ -46,24 +46,22 @@ header {
   align-items: center;
   max-width: 90%;
   margin: 0 auto;
-  
 }
 
 .calender-button {
-    border-radius: 2rem;
-    background-color: #ffffff;
-    padding: 1rem;
+  border-radius: 2rem;
+  background-color: #ffffff;
+  padding: 1rem;
 }
 
 .calender-button:hover {
-    cursor: pointer;
-    box-shadow: 0 8px 8px -4px #c0c0c0;
+  cursor: pointer;
+  box-shadow: 0 8px 8px -4px #c0c0c0;
   transform: scale(1.02);
   transition: 0.6s;
-    
 }
 
 h1 {
-    color: #fff;
+  color: #fff;
 }
 </style>
