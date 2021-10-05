@@ -1,5 +1,7 @@
 # meetup
-
+Class assignment <br>
+Create a meetups app in Vue and deploy to Heroku in a Docker-container. CI with git-actions / checkouts. <br>
+https://meetup-class-assignment.herokuapp.com/
 ## Project setup
 ```
 npm install
