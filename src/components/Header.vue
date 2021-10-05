@@ -1,9 +1,11 @@
 <template lang="en-us">
   <header>
     <div class="nav">
-      <h1>meetups</h1>
-      <h2 v-if="attending.length" class="calender-button">attending: <small>{{attending.length}} </small></h2>
-      <h2 v-else="attending.length" class="calender-button">no events </h2>
+      <h1> meetups </h1>
+      <div :class="{background: background}" class="calender-button" @click="showCalender">
+        <h2 v-if="attending.length" > attending: <small>{{attending.length}} </small> </h2>
+      <h2 v-else="attending.length" >no events </h2>
+      </div>
     </div>
   </header>
 </template>
@@ -15,9 +17,18 @@ export default {
     attending: Array,
   },
   data() {
-    return {};
+    return {
+      background:false
+    };
   },
-  methods: {},
+  methods: {
+    showCalender() {
+      if(this.attending.length) {
+        this.$emit('toggleAttending');
+        this.background = !this.background
+      }
+    },
+  },
 };
 </script>
 
@@ -25,9 +36,10 @@ export default {
 header {
   position: fixed;
   top: 0;
-  min-width: 90vw;
+  min-width: 95vw;
   margin: auto;
   background-color: #324b22;
+  z-index: 1;
 }
 
 .nav {
@@ -40,17 +52,21 @@ header {
 
 .calender-button {
   border-radius: 2rem;
-  background-color: #ffffff;
-  padding: 1rem;
+  background-color: #324b22;
+  color: #f0cf0f;
+  height: 100%;
+  width: 10em;
 }
 
 .calender-button:hover {
   cursor: pointer;
-  box-shadow: 0 8px 8px -4px #c0c0c0;
-  transform: scale(1.02);
-  transition: 0.6s;
-}
+  box-shadow: 0 0 16px 0px #f0cf0f;
 
+}
+.background {
+    background-color: #ffffff;
+
+}
 h1 {
   color: #fff;
 }
