@@ -2,7 +2,7 @@
   <div id="app">
     <Header v-on:toggleAttending="showAttending" :attending="attending" />
     <transition name="slide-fade">
-      <EventsList v-show="!toggleAttending" v-on:addToCalender="addToAttending" v-on:removeFromCalender="removeFromAttending" :events="events" />
+      <EventsList v-show="!toggleAttending" v-on:addToCalender="addToAttending" v-on:removeFromCalender="removeFromAttending" v-on:send-review="updateEventReview" :events="events" />
     </transition>
     <transition name="custom-classes-transition" enter-active-class="animated tada" leave-active-class="animated bounceOutRight">
       <Attending v-show="toggleAttending" :attending="attending" />
@@ -25,13 +25,13 @@ export default {
   data() {
     return {
       events: [
-        { id: 1, name: 'Not a sunrise', date: '2021/11/15', time: '14:00', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
-        { id: 2, name: 'ocean decipherment', date: '2021/11/15', time: '15:00', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
-        { id: 3, name: 'universe trillion', date: '2021/11/15', time: '11:45', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
-        { id: 4, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
-        { id: 5, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
-        { id: 6, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
-        { id: 7, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review:"" },
+        { id: 1, name: 'Not a sunrise', date: '2021/11/15', time: '14:00', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 2, name: 'ocean decipherment', date: '2021/11/15', time: '15:00', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 3, name: 'universe trillion', date: '2021/11/15', time: '11:45', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 4, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 5, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 6, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 7, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
       ],
 
       attending: [],
@@ -42,13 +42,22 @@ export default {
   methods: {
     addToAttending(event) {
       this.attending.push(event);
-      console.log('attending :', this.attending);
       localStorage.setItem('events-attending', JSON.stringify(this.attending));
     },
+
+    updateEventReview(payLoad) {
+      console.log("event review:", payLoad.review, payLoad.id);
+       const newReview = this.events.find(evt => evt.id === payLoad.id);
+       newReview.review = payLoad.review;
+
+      localStorage.setItem('events-reviewed', JSON.stringify(this.events));
+       
+
+      console.log("reviewed events", this.events);
+    },
+
     removeFromAttending(event) {
-      console.log('from attending in app', event);
       this.attending = this.attending.filter(item => item.id != event.id);
-      console.log('attending :', this.attending);
       localStorage.setItem('events-attending', JSON.stringify(this.attending));
     },
 
@@ -59,18 +68,19 @@ export default {
 
   mounted() {
     const storage = JSON.parse(localStorage.getItem('events-attending'));
-    console.log(storage);
-
+    const reviewStorage = JSON.parse(localStorage.getItem('events-reviewed'));
 
     if (storage !== null) {
       this.attending = storage;
       this.attending.forEach(evt => {
-      const id = evt.id;
-      const goingTo =  this.events.find(evt => evt.id === id )
-      goingTo.going = true
-      console.log(  "going to" , goingTo);
-} ) 
+        const id = evt.id;
+        const goingTo = this.events.find(evt => evt.id === id);
+        goingTo.going = true;
+      });
     }
+    if (reviewStorage !== null) {
+      this.events = reviewStorage;
+      }
   },
 };
 </script>

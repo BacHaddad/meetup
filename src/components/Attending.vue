@@ -16,11 +16,6 @@ export default {
   props: {
     attending: Array,
   },
-  data(){
-    return {
-        
-    }
-  },
   methods: {
     sendToCalender(event) {
       console.log("log event from  eventsList", event);

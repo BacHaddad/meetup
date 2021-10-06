@@ -38,7 +38,6 @@ export default {
   methods: {
     addToCalender() {
       this.event.going = !this.event.going;
-      this.event.review = this.yourReview;
       this.$emit('addToCalender', this.event);
     },
     removeFromCalender() {
@@ -50,6 +49,9 @@ export default {
       this.hideReviewInput = true;
       this.yourReview = `your review: ${this.reviews}`;
       this.reviews = '';
+      const payLoad = { ...this.event };
+      payLoad.review = this.yourReview;
+      this.$emit('addReview', payLoad);
     },
   },
 };
@@ -73,7 +75,6 @@ section {
 p {
   font-weight: 500;
   font-size: 20px;
-  margin: 1rem;
   text-align: left;
 }
 
@@ -109,9 +110,6 @@ section:hover {
   padding: 1rem;
 }
 
-p {
-  margin: 0;
-}
 small {
   color: #5a5a5a;
 }

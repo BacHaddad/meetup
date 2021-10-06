@@ -2,7 +2,7 @@
   <section class="main-container">
     <p>meetups near you</p>
     <div class="event-list">
-      <Event v-on:addToCalender="sendToCalender" v-on:removeFromCalender="deleteFromCalender" v-for="(event, index) in events" :key="index" :event="event" />
+      <Event v-on:addReview="sendReview" v-on:addToCalender="sendToCalender" v-on:removeFromCalender="deleteFromCalender" v-for="(event, index) in events" :key="index" :event="event" />
     </div>
   </section>
 </template>
@@ -18,12 +18,14 @@ export default {
   },
   methods: {
     sendToCalender(event) {
-      console.log("log event from  eventsList", event);
       this.$emit('addToCalender', event);
     },
     deleteFromCalender(event) {
-      console.log("log event from  eventsList", event);
       this.$emit('removeFromCalender', event);
+    },
+
+sendReview(review) {
+      this.$emit('send-review', review);
     }
   },
 };
