@@ -25,13 +25,13 @@ export default {
   data() {
     return {
       events: [
-        { id: 1, name: 'Not a sunrise', date: '2021/11/15', time: '14:00', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
-        { id: 2, name: 'ocean decipherment', date: '2021/11/15', time: '15:00', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
-        { id: 3, name: 'universe trillion', date: '2021/11/15', time: '11:45', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
-        { id: 4, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
-        { id: 5, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
-        { id: 6, name: 'two ghostly white figures', date: '2021/11/15', time: '10:30', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
-        { id: 7, name: 'sky calls to us', date: '2021/11/15', time: '18:15', location: 'Gothenburg', img: 'https://dummyimage.com/600x400/fff/000.jpg&text=events', going: false, review: '' },
+        { id: 1, name: 'Not a Sunrise', date: '2021/11/15', time: '14:00', going: false, review: '' },
+        { id: 2, name: 'Ocean Decipherment', date: '2021/11/15', time: '15:00', going: false, review: '' },
+        { id: 3, name: 'Universe Trillion', date: '2021/11/15', time: '11:45', going: false, review: '' },
+        { id: 4, name: 'Two Ghostly White Figures', date: '2021/11/15', time: '10:30', going: false, review: '' },
+        { id: 5, name: 'Sky Calls US', date: '2021/11/15', time: '18:15', going: false, review: '' },
+        { id: 6, name: 'Fintech Europe', date: '2021/11/15', time: '10:30', going: false, review: '' },
+        { id: 7, name: 'Coders without Borders', date: '2021/11/15', time: '18:15', going: false, review: '' },
       ],
 
       attending: [],
@@ -46,14 +46,13 @@ export default {
     },
 
     updateEventReview(payLoad) {
-      console.log("event review:", payLoad.review, payLoad.id);
-       const newReview = this.events.find(evt => evt.id === payLoad.id);
-       newReview.review = payLoad.review;
+      console.log('event review:', payLoad.review, payLoad.id);
+      const newReview = this.events.find(evt => evt.id === payLoad.id);
+      newReview.review = payLoad.review;
 
       localStorage.setItem('events-reviewed', JSON.stringify(this.events));
-       
 
-      console.log("reviewed events", this.events);
+      console.log('reviewed events', this.events);
     },
 
     removeFromAttending(event) {
@@ -80,7 +79,7 @@ export default {
     }
     if (reviewStorage !== null) {
       this.events = reviewStorage;
-      }
+    }
   },
 };
 </script>
