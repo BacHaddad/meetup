@@ -1,5 +1,5 @@
 <template>
-  <section class="container" style="background-image: ">
+  <section class="container">
     <div class="event-info">
       <h2>{{ event.name }}</h2>
       <p>
@@ -8,9 +8,14 @@
       <p>
         time: <small>{{ event.time }}</small>
       </p>
+      <p class="rev">{{ event.review || yourReview }}</p>
+      <div class="review-section" v-if="event.going" v-show="!hideReviewInput">
+        <input v-model="reviews" type="text" placeholder="write a review" :disabled="yourReview !== ''" />
+        <button class="btn" @click="sendReview" :disabled="yourReview !== ''">send</button>
+      </div>
     </div>
     <div class="btn">
-      <button v-if="event.going" class="going" @click="removeFromCalender()">going</button>
+      <button v-if="event.going" class="going" @click="removeFromCalender()" :disabled="yourReview !== ''">going</button>
       <button v-else class="not-going" @click="addToCalender()">add</button>
     </div>
   </section>
@@ -24,16 +29,27 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      hideReviewInput: false,
+      yourReview: '',
+      reviews: '',
+    };
   },
   methods: {
     addToCalender() {
       this.event.going = !this.event.going;
+      this.event.review = this.yourReview;
       this.$emit('addToCalender', this.event);
     },
     removeFromCalender() {
       this.event.going = !this.event.going;
       this.$emit('removeFromCalender', this.event);
+    },
+    sendReview() {
+      if (this.reviews == '') return;
+      this.hideReviewInput = true;
+      this.yourReview = `your review: ${this.reviews}`;
+      this.reviews = '';
     },
   },
 };
@@ -93,8 +109,23 @@ section:hover {
   padding: 1rem;
 }
 
-
+p {
+  margin: 0;
+}
 small {
   color: #5a5a5a;
+}
+
+.event-info {
+  text-align: left;
+}
+
+.review-section {
+  margin-top: 2rem;
+}
+
+p.rev {
+  font-size: 0.8rem;
+  margin: 2rem 0;
 }
 </style>
