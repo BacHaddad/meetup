@@ -65,7 +65,7 @@ export default {
     if (storage !== null) {
       this.attending = storage;
       this.attending.forEach(evt => {
-        const id = evt.id;
+      const id = evt.id;
       const goingTo =  this.events.find(evt => evt.id === id )
       goingTo.going = true
       console.log(  "going to" , goingTo);
