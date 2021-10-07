@@ -11,10 +11,10 @@
       <p class="rev">{{ event.review || yourReview }}</p>
       <div class="review-section" v-if="event.going" v-show="!hideReviewInput">
         <input v-model="reviews" type="text" placeholder="write a review" :disabled="yourReview !== ''" />
-        <button class="btn" @click="sendReview" :disabled="yourReview !== ''">send</button>
+        <button id="send-rev" @click="sendReview" :disabled="yourReview !== ''">send</button>
       </div>
     </div>
-    <div class="btn">
+    <div>
       <button v-if="event.going" class="going" @click="removeFromCalender()" :disabled="yourReview !== ''">going</button>
       <button v-else class="not-going" @click="addToCalender()">add</button>
     </div>
