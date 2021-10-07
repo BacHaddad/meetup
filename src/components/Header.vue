@@ -18,14 +18,14 @@ export default {
   },
   data() {
     return {
-      background:false
+      background: false,
     };
   },
   methods: {
     showCalender() {
-      if(this.attending.length) {
+      if (this.attending.length) {
         this.$emit('toggleAttending');
-        this.background = !this.background
+        this.background = !this.background;
       }
     },
   },
@@ -61,11 +61,9 @@ header {
 .calender-button:hover {
   cursor: pointer;
   box-shadow: 0 0 16px 0px #f0cf0f;
-
 }
 .background {
-    background-color: #ffffff;
-
+  background-color: #ffffff;
 }
 h1 {
   color: #fff;
