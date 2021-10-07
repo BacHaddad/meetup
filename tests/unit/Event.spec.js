@@ -20,6 +20,6 @@ describe('Event', () => {
     expect(btnText).toBe(expected);
   });
 
-  it("should ")
+
 
 });
